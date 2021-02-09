@@ -1,0 +1,27 @@
+# 아래 client-id와 client-secret은 예시로 넣은 더미데이터입니다. 참고만 부탁드려요.
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /console
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 958180173202-sii4epowero1eouvvjrlrnt27sikub08k.apps.googleusercontent.com
+            client-secret: k0asdfag801WdcJF8k9ST_8SG9
+          facebook:
+            client-id: 11612612521462
+            client-secret: 6578235217c5c365a98c51b02d0308ac
+          kakao:
+            client-id: 07d24faaa4ed2a46114612c50e2b719d
+            client-secret: qtNzsmHIM9fIL0TGVvGnLAHsBlq1Hi2b
+          naver:
+            client-id: UylBCsrx8iPEaqspG7Ey
+            client-secret: z1dddw68iL
+server:
+  session:
+    tracking-modes: cookie
