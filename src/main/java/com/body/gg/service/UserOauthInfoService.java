@@ -67,10 +67,10 @@ public class UserOauthInfoService {
         String uName;
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = (JSONObject)parser.parse(responseJson);
-//        uEmail = jsonObject.get("email").toString();
-//        uName = jsonObject.get("name").toString();
-        uEmail = "9guyu77@naver.com";
-        uName = "Lim";
+        uEmail = jsonObject.get("email").toString();
+        uName = jsonObject.get("name").toString();
+//        uEmail = "9guyu77@naver.com";
+//        uName = "Lim";
         UserEntity userEntity = userMapper.findUser(uEmail,oauth);
         if(userEntity == null){
             int user = userMapper.insertUser(uEmail,oauth,uName);
