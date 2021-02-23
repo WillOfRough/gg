@@ -26,12 +26,9 @@ public class UserDto implements UserDetails {
 
     public UserEntity toEntity(){
         return UserEntity.builder()
-                .no(no)
-                .username(username)
-                .email(email)
-                .nickname(nickname)
-                .password(password)
-                .gender(gender)
+                .uId(no)
+                .uName(username)
+                .uEmail(email)
                 .build();
     }
 

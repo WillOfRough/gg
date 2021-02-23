@@ -13,33 +13,22 @@ import java.util.Collection;
 @ToString
 @NoArgsConstructor
 @Data
-public class JwtDto implements UserDetails {
+public class JwtDto {
     private Long no;
-    private String username;
-    private String email;
-    private String nickname;
-    private String password;
-    private boolean isEnabled;
-    private boolean isAccountNonExpired;
-    private boolean isAccountNonLocked;
-    private boolean isCredentialsNonExpired;
-    private Collection<? extends GrantedAuthority> authorities;
+    private String uName;
+    private String uEmail;
 
     public UserEntity toEntity(){
         return UserEntity.builder()
-                .username(username)
-                .email(email)
-                .nickname(nickname)
-                .password(password)
+                .uName(uName)
+                .uEmail(uEmail)
                 .build();
     }
 
     @Builder
-    public JwtDto(Long no, String username, String nickname, String email, String password) {
+    public JwtDto(Long no, String uName, String uEmail) {
         this.no=no;
-        this.username=username;
-        this.nickname=nickname;
-        this.email = email;
-        this.password = password;
+        this.uName=uName;
+        this.uEmail=uEmail;
     }
 }

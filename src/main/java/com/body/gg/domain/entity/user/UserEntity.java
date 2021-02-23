@@ -1,27 +1,23 @@
 package com.body.gg.domain.entity.user;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.apache.ibatis.type.Alias;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Data
+@Alias("user")
 public class UserEntity {
-    private Long no;
-    private String username;
-    private String nickname;
-    private String email;
-    private String password;
-    private String gender;
+    private Long u_id;
+    private String u_name;
+    private String u_email;
+    private String u_gender;
 
     @Builder
-    public UserEntity(Long no, String username, String nickname, String email, String password, String gender) {
-        this.no = no;
-        this.username=username;
-        this.nickname=nickname;
-        this.email = email;
-        this.password = password;
-        this.gender = gender;
+    public UserEntity(Long uId, String uName, String uEmail, String uGender) {
+        this.u_id = uId;
+        this.u_name=uName;
+        this.u_email=uEmail;
+        this.u_gender = uGender;
     }
 }
