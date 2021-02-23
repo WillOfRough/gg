@@ -28,3 +28,7 @@ server:
 mybatis:
   mapper-locations: mapper/*.xml
   type-aliases-package: com.body.gg.domain.mapper
+
+java :
+  runtime:
+    version : 11
