@@ -1,4 +1,6 @@
-# 아래 client-id와 client-secret은 예시로 넣은 더미데이터입니다. 참고만 부탁드려요.
+java :
+  runtime:
+    version : 11
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -28,7 +30,3 @@ server:
 mybatis:
   mapper-locations: mapper/*.xml
   type-aliases-package: com.body.gg.domain.mapper
-
-java :
-  runtime:
-    version : 11
