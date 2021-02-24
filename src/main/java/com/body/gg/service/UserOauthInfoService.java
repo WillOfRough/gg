@@ -1,5 +1,6 @@
 package com.body.gg.service;
 
+import com.body.gg.common.APIResponseCode;
 import com.body.gg.common.jwt.JwtTokenUtil;
 import com.body.gg.domain.dto.JwtDto;
 import com.body.gg.domain.dto.UserDto;
@@ -35,15 +36,15 @@ public class UserOauthInfoService {
     @Transactional
     public String login(String token,String oauth) throws ParseException {
         String result = null;
-        String apiURL = null;
+        String apiURL;
         try{
-            if(oauth=="kakao"){
+            if(oauth.equals("kakao")){
                 apiURL = "https://kapi.kakao.com/v2/user/me";
             }
             else if(oauth.equals("naver")){
                 apiURL = "https://openapi.naver.com/v1/nid/me";
             }
-            else if(oauth == "google"){
+            else if(oauth.equals("google")){
                 apiURL = "https://www.googleapis.com/oauth2/v3/userinfo";
             }
             else{
@@ -66,12 +67,10 @@ public class UserOauthInfoService {
         String uEmail;
         String uName;
         JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject)parser.parse(responseJson);
-        JSONObject jsonObject2 = (JSONObject)jsonObject.get("response");
-        uEmail = jsonObject2.get("email").toString();
-        uName = jsonObject2.get("name").toString();
-//        uEmail = "9guyu77@naver.com";
-//        uName = "Lim";
+        JSONObject jsonToBody = (JSONObject)parser.parse(responseJson);
+        JSONObject jsonToResponse = (JSONObject)jsonToBody.get("response");
+        uEmail = jsonToResponse.get("email").toString();
+        uName = jsonToResponse.get("name").toString();
         UserEntity userEntity = userMapper.findUser(uEmail,oauth);
         if(userEntity == null){
             int user = userMapper.insertUser(uEmail,oauth,uName);

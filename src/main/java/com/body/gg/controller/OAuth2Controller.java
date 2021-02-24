@@ -1,5 +1,6 @@
 package com.body.gg.controller;
 
+import com.body.gg.common.APIResponseCode;
 import com.body.gg.service.UserOauthInfoService;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.Map;
 @RestController
 public class OAuth2Controller {
 
+    private APIResponseCode apiResponseCode;
     @Autowired
     UserOauthInfoService userOauthInfoService;
 
@@ -25,6 +27,12 @@ public class OAuth2Controller {
         String oauth = params.get("oauth");
         String jwt = userOauthInfoService.login(token,oauth);
         Map<String,Object> result = new HashMap<>();
+        if(jwt == null){
+            result.put("code",apiResponseCode.G_SUCCESS);
+        }
+        else{
+            result.put(apiResponseCode.G_SUCCESS.getKey(),apiResponseCode.G_SUCCESS.getReason());
+        }
         result.put("jwt",jwt);
         return result;
     }
