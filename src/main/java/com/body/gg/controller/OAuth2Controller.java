@@ -27,13 +27,17 @@ public class OAuth2Controller {
         String oauth = params.get("oauth");
         String jwt = userOauthInfoService.login(token,oauth);
         Map<String,Object> result = new HashMap<>();
+        Map<String,Object> data = new HashMap<>();
         if(jwt == null){
-            result.put("code",apiResponseCode.G_SUCCESS);
+            result.put("reason",apiResponseCode.G_SUCCESS.getReason());
+            result.put("code",apiResponseCode.G_SUCCESS.getKey());
         }
         else{
-            result.put(apiResponseCode.G_SUCCESS.getKey(),apiResponseCode.G_SUCCESS.getReason());
+            result.put("reason",apiResponseCode.G_SUCCESS.getReason());
+            result.put("code",apiResponseCode.G_SUCCESS.getKey());
         }
-        result.put("jwt",jwt);
+        data.put("jwt",jwt);
+        result.put("data",data);
         return result;
     }
 
