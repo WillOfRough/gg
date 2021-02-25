@@ -68,9 +68,11 @@ public class UserOauthInfoService {
         String uName;
         JSONParser parser = new JSONParser();
         JSONObject jsonToBody = (JSONObject)parser.parse(responseJson);
-        JSONObject jsonToResponse = (JSONObject)jsonToBody.get("response");
-        uEmail = jsonToResponse.get("email").toString();
-        uName = jsonToResponse.get("name").toString();
+        if(oauth.equals("naver")){
+            jsonToBody =(JSONObject)jsonToBody.get("response");
+        }
+        uEmail = jsonToBody.get("email").toString();
+        uName = jsonToBody.get("name").toString();
         UserEntity userEntity = userMapper.findUser(uEmail,oauth);
         if(userEntity == null){
             int user = userMapper.insertUser(uEmail,oauth,uName);
