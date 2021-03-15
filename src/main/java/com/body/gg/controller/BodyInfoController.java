@@ -27,8 +27,7 @@ public class BodyInfoController {
         String requestTokenHeader = request.getHeader("Authorization");
         requestTokenHeader = requestTokenHeader.substring(6);
         int u_id = jwtTokenUtil.getIdFromToken(requestTokenHeader);
-        Map<String, Object> result = new HashMap<>();
-        result.put("data", bodyInfoService.BodyInfoSelect(u_id,table));
+        Map<String, Object> result = bodyInfoService.BodyInfoSelectAll(u_id);
         return result;
     }
 
@@ -37,8 +36,7 @@ public class BodyInfoController {
         String requestTokenHeader = request.getHeader("Authorization");
         requestTokenHeader = requestTokenHeader.substring(6);
         int u_id = jwtTokenUtil.getIdFromToken(requestTokenHeader);
-        Map<String, Object> result = new HashMap<>();
-        result.put("data", bodyInfoService.BodyInfoSelectAll(u_id));
+        Map<String, Object> result = bodyInfoService.BodyInfoSelectAll(u_id);
         return result;
     }
 
