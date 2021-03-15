@@ -20,14 +20,21 @@ public class UserInfoService {
 
     @Transactional
     public Map<String,Object> UserInfoInsert(int u_id, String u_gender){
-        userMapper.insertUserInfo(u_id, u_gender);
-        userMapper.insertUserHead(u_id);
-        userMapper.insertUserTop(u_id);
-        userMapper.insertUserBot(u_id);
-        userMapper.insertUserFoot(u_id);
         Map<String,Object> serviceResult = new HashMap<>();
-        serviceResult.put("reason",apiResponseCode.G_SUCCESS.getReason());
-        serviceResult.put("code",apiResponseCode.G_SUCCESS.getKey());
+        try{
+            userMapper.insertUserInfo(u_id, u_gender);
+            userMapper.insertUserHead(u_id);
+            userMapper.insertUserTop(u_id);
+            userMapper.insertUserBot(u_id);
+            userMapper.insertUserFoot(u_id);
+            serviceResult.put("reason",apiResponseCode.G_SUCCESS.getReason());
+            serviceResult.put("code",apiResponseCode.G_SUCCESS.getKey());
+        }
+        catch(Exception e){
+            System.out.println(e);
+            serviceResult.put("reason",apiResponseCode.G_INTERNAL_ERROR.getReason());
+            serviceResult.put("code",apiResponseCode.G_INTERNAL_ERROR.getKey());
+        }
         return serviceResult;
     }
 }

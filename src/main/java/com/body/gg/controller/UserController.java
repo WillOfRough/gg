@@ -35,9 +35,7 @@ public class UserController {
         requestTokenHeader = requestTokenHeader.substring(6);
         String gender = params.get("gender");
         int u_id = jwtTokenUtil.getIdFromToken(requestTokenHeader);
-        userInfoService.UserInfoInsert(u_id,gender);
-        Map<String, Object> resultReturn = new HashMap<>();
-        resultReturn.put("result", resultReturn);
+        Map<String, Object> resultReturn = userInfoService.UserInfoInsert(u_id,gender);
         return resultReturn;
     }
 
