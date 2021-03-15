@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.body.gg.domain.mapper.BodyInfoMapper">
+
+    <select id="bodyInfoSelectAll" resultType="com.body.gg.domain.entity.body.BodyEntity">
+        SELECT * FROM top
+                          INNER JOIN bot ON top.u_id = bot.u_id
+                          INNER JOIN foot ON top.u_id = foot.u_id
+                          INNER JOIN head ON top.u_id = head.u_id
+        WHERE top.u_id = #{_id}
+    </select>
+
+    <select id="bodyInfoSelect" resultType="com.body.gg.domain.entity.body.BodyEntity">
+        SELECT * FROM ${_table} WHERE u_id =#{_id};
+    </select>
+
+    <update id="updateUserNumInfo">
+        UPDATE ${_table} SET ${_key} = #{_value} WHERE u_id = #{_id};
+    </update>
+
+    <update id="updateUserTextInfo">
+        UPDATE ${_table} SET ${_key} = #{_value} WHERE u_id = #{_id};
+    </update>
+</mapper>

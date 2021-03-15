@@ -22,7 +22,7 @@ public class OAuth2Controller {
     UserOauthInfoService userOauthInfoService;
 
     @PostMapping("/oauthlogin")
-    public Map<String,Object> sendEmail (@RequestBody Map<String, String> params) throws ParseException {
+    public Map<String,Object> oauthLogin (@RequestBody Map<String, String> params) throws ParseException {
         String token = params.get("token");
         String oauth = params.get("oauth");
         String jwt = userOauthInfoService.login(token,oauth);

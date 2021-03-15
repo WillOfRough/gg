@@ -11,15 +11,32 @@
         WHERE u_email = #{email} and u_oauth = #{oauth}
     </select>
 
+
+    <update id="updateTop">
+        UPDATE ${_table} SET ${_key} = #{_value} WHERE u_id = #{_id};
+    </update>
+
     <insert id="insertUser">
         INSERT INTO user(u_email,u_name,u_oauth) VALUES (#{email},#{name},#{oauth});
     </insert>
 
     <update id="insertUserInfo">
-        UPDATE user SET u_gender = #{gender} WHERE u_id = #{id};
-        INSERT INTO head(u_id) VALUE (#{u_id});
-        INSERT INTO top(u_id) VALUE (#{u_id});
-        INSERT INTO bot(u_id) VALUE (#{u_id});
-        INSERT INTO foot(u_id) VALUE (#{u_id});
+        UPDATE user SET u_gender = #{_gender} WHERE u_id = #{_id};
     </update>
+
+    <insert id="insertUserHead">
+        INSERT INTO head(u_id) VALUE (#{_id});
+    </insert>
+
+    <insert id="insertUserTop">
+        INSERT INTO top(u_id) VALUE (#{_id});
+    </insert>
+
+    <insert id="insertUserBot">
+        INSERT INTO bot(u_id) VALUE (#{_id});
+    </insert>
+
+    <insert id="insertUserFoot">
+        INSERT INTO foot(u_id) VALUE (#{_id});
+    </insert>
 </mapper>

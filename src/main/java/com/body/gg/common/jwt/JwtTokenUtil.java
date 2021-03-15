@@ -20,19 +20,19 @@ public class JwtTokenUtil implements Serializable {
         Jws<Claims> claims = Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token);
-        return (String) claims.getBody().get("username");
+        return (String) claims.getBody().get("u_name");
     }
     public String getEmailFromToken(String token) {
         Jws<Claims> claims = Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token);
-        return (String) claims.getBody().get("email");
+        return (String) claims.getBody().get("u_email");
     }
-    public Long getUsernoFromToken(String token) {
+    public int getIdFromToken(String token) {
         Jws<Claims> claims = Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token);
-        return Long.valueOf(String.valueOf(claims.getBody().get("userNo")));
+        return Integer.valueOf(String.valueOf(claims.getBody().get("userNo")));
     }
     /*
     //retrieve expiration date from jwt token
