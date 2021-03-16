@@ -49,8 +49,7 @@ public class BodyInfoController {
         String type = params.get("type");
         String table = params.get("table");
         Double value = Double.parseDouble(params.get("value"));
-        Map<String, Object> result = new HashMap<>();
-        result.put("data", bodyInfoService.UserInfoUpdate(u_id,table,key,value));
+        Map<String, Object> result = bodyInfoService.UserInfoUpdate(u_id,table,key,value);
         return result;
     }
 }
