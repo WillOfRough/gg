@@ -1,14 +1,17 @@
 package com.body.gg.domain.mapper;
 
-import com.body.gg.domain.entity.body.BodyEntity;
+import com.body.gg.domain.entity.BodyInfoEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @Mapper
 public interface BodyInfoMapper {
-    BodyEntity bodyInfoSelect(int _id,String _table);
-    BodyEntity bodyInfoSelectAll(int _id);
-    int updateUserNumInfo(int _id,String _table,String _key, double _value);
-    int updateUserTextInfo(int _id,String _table,String _key, String _value);
+    List<BodyInfoEntity> bodyInfoSelectAll(int _uId);
+    List<BodyInfoEntity> bodyInfoSelectPart(int _uId,String _table);
+    BodyInfoEntity selectInfoBody(int _uId, String _table, String _pName, String _mmtName);
+    int insertUserInfo(int _uId,String _table,String _part,String _size, String _mmt);
+    int updateUserInfo(int _uId,String _table,String _part,String _size, String _mmt);
 }

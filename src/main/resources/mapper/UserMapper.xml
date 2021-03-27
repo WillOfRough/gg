@@ -5,38 +5,28 @@
 
 <mapper namespace="com.body.gg.domain.mapper.UserMapper">
 
-    <select id="findUser" resultType="com.body.gg.domain.entity.user.UserEntity">
+    <select id="findUser" resultType="com.body.gg.domain.entity.UserEntity">
         SELECT *
         FROM user
         WHERE u_email = #{email} and u_oauth = #{oauth}
     </select>
 
-
-    <update id="updateTop">
-        UPDATE ${_table} SET ${_key} = #{_value} WHERE u_id = #{_id};
-    </update>
-
     <insert id="insertUser">
         INSERT INTO user(u_email,u_name,u_oauth) VALUES (#{email},#{name},#{oauth});
     </insert>
 
-    <update id="insertUserInfo">
-        UPDATE user SET u_gender = #{_gender} WHERE u_id = #{_id};
+    <update id="updateUserGender">
+        UPDATE user set u_gender = #{_gender} WHERE u_id = #{_uId}
     </update>
 
-    <insert id="insertUserHead">
-        INSERT INTO head(u_id) VALUE (#{_id});
-    </insert>
+    <select id="selectUserGender" resultType="com.body.gg.domain.entity.UserEntity">
+        SELECT u_gender FROM user WHERE u_id = #{_uId}
+    </select>
 
-    <insert id="insertUserTop">
-        INSERT INTO top(u_id) VALUE (#{_id});
-    </insert>
+    <select id="checkFirstUser" resultType="com.body.gg.domain.entity.UserEntity">
+        SELECT *
+        FROM user
+        WHERE u_id = #{_uId}
+    </select>
 
-    <insert id="insertUserBot">
-        INSERT INTO bot(u_id) VALUE (#{_id});
-    </insert>
-
-    <insert id="insertUserFoot">
-        INSERT INTO foot(u_id) VALUE (#{_id});
-    </insert>
 </mapper>

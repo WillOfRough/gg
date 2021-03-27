@@ -1,10 +1,8 @@
 package com.body.gg.service;
 
-import com.body.gg.common.APIResponseCode;
 import com.body.gg.common.jwt.JwtTokenUtil;
 import com.body.gg.domain.dto.JwtDto;
-import com.body.gg.domain.dto.UserDto;
-import com.body.gg.domain.entity.user.UserEntity;
+import com.body.gg.domain.entity.UserEntity;
 import com.body.gg.domain.mapper.UserMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,7 +19,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service

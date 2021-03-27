@@ -1,12 +1,8 @@
 package com.body.gg.domain.dto;
 
 
-import com.body.gg.domain.entity.user.UserEntity;
+import com.body.gg.domain.entity.UserEntity;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
 
 @Getter
 @Setter

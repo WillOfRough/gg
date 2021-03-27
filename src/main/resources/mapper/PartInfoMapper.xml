@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.body.gg.domain.mapper.PartInfoMapper">
+
+    <select id="selectInfoPart" resultType="com.body.gg.domain.entity.PartEntity">
+        SELECT *
+        FROM part INNER JOIN measurement ON part.g_id = measurement.g_id
+        WHERE part.p_name = #{_pName} AND measurement.m_name = #{_mmtName}
+    </select>
+
+</mapper>

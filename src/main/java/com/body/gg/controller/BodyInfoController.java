@@ -22,16 +22,7 @@ public class BodyInfoController {
     @Autowired
     JwtTokenError jwtTokenError;
 
-    @GetMapping("/body/{table}")
-    public Map<String, Object> BodyInfoSelect(HttpServletRequest request,@PathVariable String table) {
-        String requestTokenHeader = request.getHeader("Authorization");
-        requestTokenHeader = requestTokenHeader.substring(6);
-        int u_id = jwtTokenUtil.getIdFromToken(requestTokenHeader);
-        Map<String, Object> result = bodyInfoService.BodyInfoSelectAll(u_id);
-        return result;
-    }
-
-    @GetMapping("/body/All")
+    @GetMapping("/body/all")
     public Map<String, Object> BodyInfoSelectAll(HttpServletRequest request) throws ParseException {
         String requestTokenHeader = request.getHeader("Authorization");
         requestTokenHeader = requestTokenHeader.substring(6);
@@ -41,15 +32,14 @@ public class BodyInfoController {
     }
 
     @PostMapping("/body/info")
-    public Map<String, Object> BodyInfoUpdate(HttpServletRequest request, @RequestBody Map<String, String> params) throws ParseException {
+    public Map<String, Object> BodyInfoInsert(HttpServletRequest request, @RequestBody Map<String, String> params) throws ParseException {
         String requestTokenHeader = request.getHeader("Authorization");
         requestTokenHeader = requestTokenHeader.substring(6);
-        int u_id = jwtTokenUtil.getIdFromToken(requestTokenHeader);
-        String key = params.get("key");
-        String type = params.get("type");
-        String table = params.get("table");
-        Double value = Double.parseDouble(params.get("value"));
-        Map<String, Object> result = bodyInfoService.UserInfoUpdate(u_id,table,key,value);
+        int uId = jwtTokenUtil.getIdFromToken(requestTokenHeader);
+        String part = params.get("part");
+        String size = params.get("size");
+        String mmtName = params.get("mmtName");
+        Map<String, Object> result = bodyInfoService.UserInfoInsert(uId,part,size,mmtName);
         return result;
     }
 }

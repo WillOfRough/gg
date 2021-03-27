@@ -1,22 +1,17 @@
 package com.body.gg.domain.mapper;
 
-import com.body.gg.domain.dto.UserDto;
-import com.body.gg.domain.entity.user.UserEntity;
+import com.body.gg.domain.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 @Repository
 @Mapper
 public interface UserMapper {
     UserEntity findUser(String email, String oauth);
+    UserEntity checkFirstUser(int _uId);
+    int updateUserGender(int _uId, String _gender);
+    UserEntity selectUserGender(int _uId);
     int insertUser(String email, String oauth, String name);
-    int insertUserInfo(int _id, String _gender);
-
-    int insertUserHead(int _id);
-    int insertUserTop(int _id);
-    int insertUserBot(int _id);
-    int insertUserFoot(int _id);
 
     int deleteUser();
     int updateUser();

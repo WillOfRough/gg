@@ -5,23 +5,35 @@
 
 <mapper namespace="com.body.gg.domain.mapper.BodyInfoMapper">
 
-    <select id="bodyInfoSelectAll" resultType="com.body.gg.domain.entity.body.BodyEntity">
-        SELECT * FROM top
-                          INNER JOIN bot ON top.u_id = bot.u_id
-                          INNER JOIN foot ON top.u_id = foot.u_id
-                          INNER JOIN head ON top.u_id = head.u_id
-        WHERE top.u_id = #{_id}
+    <select id="bodyInfoSelectAll" resultType="com.body.gg.domain.entity.BodyInfoEntity">
+        SELECT u_id,part.p_name as p_name,size,m_name,c_date,p_table FROM head INNER JOIN part ON head.p_name = part.p_name WHERE u_id = #{_uId}
+        UNION ALL
+        SELECT u_id,part.p_name,size,m_name,c_date,p_table FROM top INNER JOIN part ON top.p_name = part.p_name WHERE u_id = #{_uId}
+        UNION ALL
+        SELECT u_id,part.p_name,size,m_name,c_date,p_table FROM bot INNER JOIN part ON bot.p_name = part.p_name WHERE u_id = #{_uId}
+        UNION ALL
+        SELECT u_id,part.p_name,size,m_name,c_date,p_table FROM foot INNER JOIN part ON foot.p_name = part.p_name WHERE u_id = #{_uId}
+        UNION ALL
+        SELECT u_id,part.p_name,size,m_name,c_date,p_table FROM st_part INNER JOIN part ON st_part.p_name = part.p_name WHERE u_id = #{_uId}
     </select>
 
-    <select id="bodyInfoSelect" resultType="com.body.gg.domain.entity.body.BodyEntity">
+    <select id="bodyInfoSelectPart" resultType="com.body.gg.domain.entity.BodyInfoEntity">
+        SELECT u_id,part.p_name,size,m_name,c_date FROM ${_table} INNER JOIN part ON ${_table}.p_name = part.p_name WHERE u_id = #{_uId}
+    </select>
+
+    <select id="selectInfoBody" resultType="com.body.gg.domain.entity.BodyInfoEntity">
+        SELECT * FROM ${_table} WHERE u_id = #{_uId} AND p_name = #{_pName} AND m_name = #{_mmtName};
+    </select>
+
+    <insert id = "insertUserInfo">
+        INSERT INTO ${_table}(u_id,p_name,size,m_name) VALUES (#{_uId},#{_part},#{_size},#{_mmt});
+    </insert>
+
+    <update id = "updateUserInfo">
+        UPDATE ${_table} set size = #{_size} WHERE u_id = #{_uId} AND p_name = #{_part} AND m_name = #{_mmt};
+    </update>
+
+    <select id="bodyInfoSelect" resultType="com.body.gg.domain.entity.BodyInfoEntity">
         SELECT * FROM ${_table} WHERE u_id =#{_id};
     </select>
-
-    <update id="updateUserNumInfo">
-        UPDATE ${_table} SET ${_key} = #{_value} WHERE u_id = #{_id};
-    </update>
-
-    <update id="updateUserTextInfo">
-        UPDATE ${_table} SET ${_key} = #{_value} WHERE u_id = #{_id};
-    </update>
 </mapper>
