@@ -30,7 +30,7 @@
     </insert>
 
     <update id = "updateUserInfo">
-        UPDATE ${_table} set size = #{_size} WHERE u_id = #{_uId} AND p_name = #{_part} AND m_name = #{_mmt};
+        UPDATE ${_table} set size = #{_size},c_date = NOW() WHERE u_id = #{_uId} AND p_name = #{_part} AND m_name = #{_mmt};
     </update>
 
     <select id="bodyInfoSelect" resultType="com.body.gg.domain.entity.BodyInfoEntity">
