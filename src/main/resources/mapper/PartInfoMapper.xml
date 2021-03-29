@@ -11,4 +11,8 @@
         WHERE part.p_name = #{_pName} AND measurement.m_name = #{_mmtName}
     </select>
 
+
+    <insert id = "insertInfoPart">
+        INSERT INTO part(p_name,p_table,s_table,g_id,p_comment) VALUES (#{_pName},#{_pTable},#{_sTable},#{_gId},#{_pComment});
+    </insert>
 </mapper>

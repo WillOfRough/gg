@@ -10,4 +10,5 @@ import java.util.List;
 @Mapper
 public interface MeasurementMapper {
     List<MeasurementEntity> selectInfoMeasurement(String _mName);
+    MeasurementEntity selectInfoGroupIdOfMeasurementName(String _mName);
 }

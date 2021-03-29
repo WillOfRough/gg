@@ -9,4 +9,9 @@
         SELECT * FROM measurement WHERE g_id = (SELECT g_id FROM part WHERE p_name = #{_mName})
     </select>
 
+
+    <select id="selectInfoGroupIdOfMeasurementName" resultType="com.body.gg.domain.entity.MeasurementEntity">
+        SELECT g_id FROM body.measurement where m_name = #{_mName};
+    </select>
+
 </mapper>

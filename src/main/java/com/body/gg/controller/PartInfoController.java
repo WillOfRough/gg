@@ -28,17 +28,25 @@ public class PartInfoController {
         return result;
     }
 
-//    @PostMapping("/info/part")
-//    public Map<String, Object> PartInfoInsert(HttpServletRequest request,@RequestBody Map<String, String> params) throws ParseException {
-//        String requestTokenHeader = request.getHeader("Authorization");
-//        requestTokenHeader = requestTokenHeader.substring(6);
-//        int u_id = jwtTokenUtil.getIdFromToken(requestTokenHeader);
-//        String gName = params.get("gName");
-//        String part = params.get("part");
-//        String part = params.get("part");
-//        String part = params.get("part");
-//        Map<String, Object> result = partInfoService.insertInfoPart(u_id);
-//        return result;
-//    }
+    @PostMapping("/info/part")
+    public Map<String, Object> PartInfoInsert(HttpServletRequest request,@RequestBody Map<String, String> params) throws ParseException {
+        String sTable = "";
+        String requestTokenHeader = request.getHeader("Authorization");
+        requestTokenHeader = requestTokenHeader.substring(6);
+        int u_id = jwtTokenUtil.getIdFromToken(requestTokenHeader);
+        String pName = params.get("pName");
+        String pTable = params.get("pTable");
+        String type = params.get("type");
+        String mmtName = params.get("mmtName");
+        String comment = params.get("comment");
+        if(type.equals("text")){
+            sTable = "st_part";
+        }
+        else{
+            sTable = pTable;
+        }
+        Map<String, Object> result = partInfoService.insertInfoPart(pName,pTable,sTable,mmtName,comment);
+        return result;
+    }
 
 }

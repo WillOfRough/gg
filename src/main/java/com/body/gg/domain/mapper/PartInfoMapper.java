@@ -12,6 +12,6 @@ public interface PartInfoMapper {
     PartEntity selectInfoPart(String _pName,String _mmtName);
     PartEntity selectInfoMeasurementOfPart(String _pName,String _mmtName);
     List<PartEntity> selectInfoTableOfPart(String _table);
-    int insertInfoPart(String _pName, String _pTable, int _gId, String _pComment);
+    int insertInfoPart(String _pName, String _pTable,String _sTable,int _gId,String _pComment);
 
 }
