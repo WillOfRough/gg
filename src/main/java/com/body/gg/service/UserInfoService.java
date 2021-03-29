@@ -21,13 +21,19 @@ public class UserInfoService {
     @Transactional
     public Map<String,Object> UpdateUserGender(int u_id, String u_gender){
         Map<String,Object> serviceResult = new HashMap<>();
+        Map<String,Object> dataResult = new HashMap<>();
         try{
             userMapper.updateUserGender(u_id, u_gender);
+            userMapper.updateUserFirst(u_id);
+            dataResult.put("result",true);
+            serviceResult.put("data",dataResult);
             serviceResult.put("reason",apiResponseCode.G_SUCCESS.getReason());
             serviceResult.put("code",apiResponseCode.G_SUCCESS.getKey());
         }
         catch(Exception e){
             System.out.println(e);
+            dataResult.put("result",false);
+            serviceResult.put("data",dataResult);
             serviceResult.put("reason",apiResponseCode.G_INTERNAL_ERROR.getReason());
             serviceResult.put("code",apiResponseCode.G_INTERNAL_ERROR.getKey());
         }

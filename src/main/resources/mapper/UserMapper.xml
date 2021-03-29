@@ -14,7 +14,9 @@
     <insert id="insertUser">
         INSERT INTO user(u_email,u_name,u_oauth) VALUES (#{email},#{name},#{oauth});
     </insert>
-
+    <update id="updateUserFirst">
+        UPDATE user set u_start = 1 WHERE u_id = #{_uId};
+    </update>
     <update id="updateUserGender">
         UPDATE user set u_gender = #{_gender} WHERE u_id = #{_uId}
     </update>

@@ -10,6 +10,7 @@ public interface UserMapper {
     UserEntity findUser(String email, String oauth);
     UserEntity checkFirstUser(int _uId);
     int updateUserGender(int _uId, String _gender);
+    int updateUserFirst(int _uId);
     UserEntity selectUserGender(int _uId);
     int insertUser(String email, String oauth, String name);
 
