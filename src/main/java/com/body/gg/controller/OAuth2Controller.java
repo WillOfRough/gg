@@ -25,19 +25,7 @@ public class OAuth2Controller {
     public Map<String,Object> oauthLogin (@RequestBody Map<String, String> params) throws ParseException {
         String token = params.get("token");
         String oauth = params.get("oauth");
-        String jwt = userOauthInfoService.login(token,oauth);
-        Map<String,Object> result = new HashMap<>();
-        Map<String,Object> data = new HashMap<>();
-        if(jwt == null){
-            result.put("reason",apiResponseCode.G_SUCCESS.getReason());
-            result.put("code",apiResponseCode.G_SUCCESS.getKey());
-        }
-        else{
-            result.put("reason",apiResponseCode.G_SUCCESS.getReason());
-            result.put("code",apiResponseCode.G_SUCCESS.getKey());
-        }
-        data.put("jwt",jwt);
-        result.put("data",data);
+        Map<String,Object> result = userOauthInfoService.login(token,oauth);
         return result;
     }
 

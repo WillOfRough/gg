@@ -1,5 +1,6 @@
 package com.body.gg.service;
 
+import com.body.gg.common.APIResponseCode;
 import com.body.gg.common.jwt.JwtTokenUtil;
 import com.body.gg.domain.dto.JwtDto;
 import com.body.gg.domain.entity.UserEntity;
@@ -24,6 +25,7 @@ import java.util.Map;
 @Service
 public class UserOauthInfoService {
 
+    private APIResponseCode apiResponseCode;
     @Autowired
     private UserMapper userMapper;
 
@@ -31,8 +33,9 @@ public class UserOauthInfoService {
     private JwtTokenUtil jwtTokenUtil;
 
     @Transactional
-    public String login(String token,String oauth) throws ParseException {
-        String result = null;
+    public Map<String, Object> login(String token,String oauth) throws ParseException {
+        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> dataResult = new HashMap<>();
         String apiURL;
         try{
             if(oauth.equals("kakao")){
@@ -45,6 +48,8 @@ public class UserOauthInfoService {
                 apiURL = "https://www.googleapis.com/oauth2/v3/userinfo";
             }
             else{
+                result.put("reason",apiResponseCode.G_SUCCESS.getReason());
+                result.put("code",apiResponseCode.G_SUCCESS.getKey());
                 return result;
             }
 
@@ -53,12 +58,31 @@ public class UserOauthInfoService {
             requestHeaders.put("Authorization", header);
             String responseJson = responseJson(apiURL,requestHeaders);
             JwtDto jwtDto = getDto(responseJson,oauth);
-            result = jwtTokenUtil.generateToken(jwtDto);
+            String jwt = jwtTokenUtil.generateToken(jwtDto);
+            if(jwt == null){
+                result.put("reason",apiResponseCode.G_SUCCESS.getReason());
+                result.put("code",apiResponseCode.G_SUCCESS.getKey());
+            }
+            else{
+                UserEntity userEntity = userMapper.checkFirstUser(jwtDto.getNo().intValue());
+                if(userEntity.getU_start() == 1){
+                    dataResult.put("first",true);
+                }
+                else{
+                    dataResult.put("first",false);
+                }
+                dataResult.put("jwt",jwt);
+                result.put("reason",apiResponseCode.G_INTERNAL_ERROR.getReason());
+                result.put("code",apiResponseCode.G_INTERNAL_ERROR.getKey());
+            }
+
+            return result;
         }
         catch (ExceptionInInitializerError error){
-            System.out.println(error);
+            result.put("reason",apiResponseCode.G_SUCCESS.getReason());
+            result.put("code",apiResponseCode.G_SUCCESS.getKey());
+            return result;
         }
-        return result;
     }
     private JwtDto getDto(String responseJson,String oauth) throws ParseException {
         String uEmail;
