@@ -1,5 +1,6 @@
 package com.body.gg.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
 
@@ -7,6 +8,7 @@ import org.apache.ibatis.type.Alias;
 @Getter
 @Data
 @Alias("user")
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class UserEntity {
     private Long u_id;
     private String u_email;

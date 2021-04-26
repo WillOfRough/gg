@@ -72,15 +72,16 @@ public class UserOauthInfoService {
                     dataResult.put("first",false);
                 }
                 dataResult.put("jwt",jwt);
-                result.put("reason",apiResponseCode.G_INTERNAL_ERROR.getReason());
-                result.put("code",apiResponseCode.G_INTERNAL_ERROR.getKey());
+                result.put("data",dataResult);
+                result.put("reason",apiResponseCode.G_SUCCESS.getReason());
+                result.put("code",apiResponseCode.G_SUCCESS.getKey());
             }
 
             return result;
         }
         catch (ExceptionInInitializerError error){
-            result.put("reason",apiResponseCode.G_SUCCESS.getReason());
-            result.put("code",apiResponseCode.G_SUCCESS.getKey());
+            result.put("reason",apiResponseCode.G_INTERNAL_ERROR.getReason());
+            result.put("code",apiResponseCode.G_INTERNAL_ERROR.getKey());
             return result;
         }
     }
